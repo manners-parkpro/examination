@@ -15,6 +15,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         String jwt = Header.JWT_TYPE;
+
         SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwt);
         Components components = new Components().addSecuritySchemes(jwt, new SecurityScheme()
                 .name(jwt)
