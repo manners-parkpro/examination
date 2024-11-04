@@ -2,6 +2,7 @@ package com.examination.api.model.dto;
 
 import com.examination.api.model.types.YNType;
 import com.examination.api.validation.EmailValid;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -67,6 +68,7 @@ public class AccountDto {
         @NotBlank(message = "Nickname을 입력해주세요.")
         @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z]{2,10}$", message = "Nickname은 한글, 영문 최소 2자, 최대 10자로 입력해 주세요.")
         private String nickname;
+        @JsonIgnore
         @Builder.Default
         private YNType activeYn = YNType.Y;
     }

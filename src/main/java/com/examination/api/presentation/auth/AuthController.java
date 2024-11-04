@@ -4,15 +4,13 @@ import com.examination.api.exception.AlreadyEntity;
 import com.examination.api.exception.RequiredParamNonException;
 import com.examination.api.exception.UserNotFoundException;
 import com.examination.api.model.dto.ApiResult;
-import com.examination.api.model.dto.LoginUser;
 import com.examination.api.model.dto.TokenDto;
 import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.types.ApiResultCode;
-import com.examination.api.model.types.ResponseMessage;
 import com.examination.api.service.auth.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,6 +22,7 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping("sign-up")
+    @Operation(summary = "회원가입", description = "사용자가 회원가입 할 때 사용하는 API")
     public ApiResult<AccountDto.ResponseDto> signUp(@RequestBody @Valid AccountDto.RequestDto dto) throws AlreadyEntity, RequiredParamNonException {
 
         return ApiResult.<AccountDto.ResponseDto>builder()
@@ -34,6 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("login")
+    @Operation(summary = "로그인", description = "사용자 로그인 API")
     public ApiResult<TokenDto> login(@RequestBody @Valid AccountDto.LoginDto dto) throws RequiredParamNonException {
 
         return ApiResult.<TokenDto>builder()
@@ -44,6 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("reissue")
+    @Operation(summary = "토큰 재발행", description = "사용자 토큰 만료시 토큰 재발행 API")
     public ApiResult<TokenDto> reissue(@RequestHeader(REFRESH_TOKEN_HEADER) String refreshToken) throws RequiredParamNonException, UserNotFoundException {
 
         return ApiResult.<TokenDto>builder()
@@ -54,6 +55,7 @@ public class AuthController {
     }
 
     @PostMapping("logout")
+    @Operation(summary = "로그아웃", description = "사용자 로그아웃 API")
     public ApiResult logout(@RequestBody @Valid AccountDto.LogoutDto dto) throws UserNotFoundException {
 
         service.logout(dto.getUsername());

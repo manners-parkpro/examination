@@ -9,6 +9,7 @@ import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.model.types.ResponseMessage;
 import com.examination.api.service.account.AccountService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +24,7 @@ public class AccountController {
     private final AccountService service;
 
     @GetMapping("detail")
+    @Operation(summary = "유저 정보", description = "유저 상세정보 API")
     public ApiResult<AccountDto.ResponseDto> detail(@AuthenticationPrincipal LoginUser loginUser) throws RequiredParamNonException, UserNotFoundException {
         if (loginUser == null)
             throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());
@@ -35,6 +37,7 @@ public class AccountController {
     }
 
     @PostMapping("modify/password")
+    @Operation(summary = "비밀번호 변경", description = "비밀번호 변경 API")
     public ApiResult modifyPassword(@AuthenticationPrincipal LoginUser loginUser, @RequestBody String password) throws RequiredParamNonException, UserNotFoundException, AlreadyEntity {
         if (loginUser == null)
             throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());
