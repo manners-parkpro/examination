@@ -1,8 +1,9 @@
 package com.examination.api.validation;
 
-import com.examination.api.util.CommonUtil;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+
+import java.util.regex.Pattern;
 
 public class EmailValidator implements ConstraintValidator<EmailValid, String> {
     private String message;
@@ -16,9 +17,15 @@ public class EmailValidator implements ConstraintValidator<EmailValid, String> {
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if(value == null) { return false; }
         try {
-            return CommonUtil.isEmailRegex(value);
+            return isEmailRegex(value);
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private boolean isEmailRegex(String str) {
+        if (str.length() > 100) return false;
+        String pattern = "\\b[\\w\\.-]+@[\\w\\.-]+\\.\\w{1,4}\\b";
+        return Pattern.matches(pattern, str);
     }
 }
