@@ -5,6 +5,7 @@ import com.examination.api.exception.RequiredParamNonException;
 import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.dto.ApiResult;
 import com.examination.api.model.types.ApiResultCode;
+import com.examination.api.service.admin.auth.AdminAuthService;
 import com.examination.api.service.front.auth.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -21,11 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth/admin/")
 public class AdminAuthController {
 
-    private final AuthService service;
+    private final AdminAuthService service;
 
     @PostMapping("sign-up")
-    @Operation(summary = "회원가입", description = "사용자가 회원가입 할 때 사용하는 API")
-    public ApiResult<AccountDto.ResponseDto> signUp(@RequestBody @Valid AccountDto.RequestDto dto) throws AlreadyEntity, RequiredParamNonException {
+    @Operation(summary = "ADMIN 회원가입", description = "ADMIN 회원가입 할 때 사용하는 API")
+    public ApiResult<AccountDto.ResponseDto> adminSignUp(@RequestBody @Valid AccountDto.RequestDto dto) throws AlreadyEntity, RequiredParamNonException {
 
         return ApiResult.<AccountDto.ResponseDto>builder()
                 .code(ApiResult.RESULT_CODE_OK)

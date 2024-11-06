@@ -1,7 +1,7 @@
 package com.examination.api.config;
 
-import com.examination.api.core.JwtAccessDeniedHandler;
-import com.examination.api.core.JwtAuthenticationEntryPoint;
+import com.examination.api.core.CustomAccessDeniedHandler;
+import com.examination.api.core.CustomAuthenticationEntryPoint;
 import com.examination.api.filter.JwtFilter;
 import com.examination.api.core.TokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +25,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
     private final TokenProvider tokenProvider;
 
     @Bean
@@ -40,8 +40,8 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(eh -> eh
-                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                        .accessDeniedHandler(jwtAccessDeniedHandler)
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
                 )
                 .headers((headerConfig) ->
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
