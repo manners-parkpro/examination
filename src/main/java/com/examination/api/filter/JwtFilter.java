@@ -30,7 +30,7 @@ import java.util.Set;
 public class JwtFilter extends OncePerRequestFilter {
 
     private final TokenProvider tokenProvider;
-    private final Set<String> paths = new HashSet<>(Arrays.asList("/h2-console/**", "/swagger-ui/**", "/v3/**", "/api/auth/**", "/api/admin/auth/**"));
+    private final Set<String> paths = new HashSet<>(Arrays.asList("/h2-console/**", "/swagger-ui/**", "/v3/**", "/api/auth/**"));
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

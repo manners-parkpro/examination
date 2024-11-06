@@ -46,10 +46,10 @@ public class AuthService {
                 .username(dto.getUsername())
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .nickname(dto.getNickname())
-                .activeYn(YNType.N)
+                .activeYn(YNType.Y)
                 .build();
 
-        setAuthorities(account);
+        setAuthorities(account, RoleType.ROLE_USER);
 
         repository.save(account);
 
@@ -100,7 +100,7 @@ public class AuthService {
             refreshTokenRepository.delete(refreshToken);
     }
 
-    private void setAuthorities(Account account) throws RequiredParamNonException {
+    public void setAuthorities(Account account, RoleType role) throws RequiredParamNonException {
         if (account == null)
             throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());
 
@@ -108,7 +108,7 @@ public class AuthService {
 
         List<AccountAuthority> authorities = new ArrayList<>();
         AccountAuthority authority = AccountAuthority.builder()
-                .authorityName(RoleType.ROLE_USER)
+                .authorityName(role)
                 .account(account)
                 .build();
 

@@ -1,10 +1,13 @@
 package com.examination.api.presentation.admin.account;
 
 import com.examination.api.exception.UserNotFoundException;
+import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.dto.ApiResult;
 import com.examination.api.model.types.ApiResultCode;
+import com.examination.api.model.types.YNType;
 import com.examination.api.service.admin.auth.AdminAuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +22,9 @@ public class AdminAccountController {
 
     @PostMapping("active/{id}")
     @Operation(summary = "ADMIN 계정 활성화 변경", description = "ADMIN 계정 활성화 변경하는 API")
-    public ApiResult active(@PathVariable Long id, @RequestBody String activeYn) throws UserNotFoundException {
+    public ApiResult active(@PathVariable Long id, @RequestBody @Valid AccountDto.activeDto dto) throws UserNotFoundException {
 
-        service.active(id, activeYn);
+        service.active(id, dto.getActiveYn());
 
         return ApiResult.builder()
                 .code(ApiResult.RESULT_CODE_OK)
