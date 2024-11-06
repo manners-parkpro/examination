@@ -1,4 +1,4 @@
-package com.examination.api.service.account;
+package com.examination.api.service.front.account;
 
 import com.examination.api.exception.AlreadyEntity;
 import com.examination.api.exception.UserNotFoundException;

@@ -1,5 +1,6 @@
-package com.examination.api.service.account;
+package com.examination.api.service.front.account;
 
+import com.examination.api.exception.UserNotFoundException;
 import com.examination.api.model.domain.Account;
 import com.examination.api.model.types.YNType;
 import com.examination.api.repository.account.AccountRepository;
@@ -39,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new RuntimeException(username + " -> 활성화되어 있지 않습니다.");
 
         List<GrantedAuthority> grantedAuthorities = account.getAuthorities().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName().toString()))
                 .collect(Collectors.toList());
 
         return new User(username, account.getPassword(), grantedAuthorities);

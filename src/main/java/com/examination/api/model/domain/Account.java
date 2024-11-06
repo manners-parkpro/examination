@@ -36,7 +36,7 @@ public class Account extends BaseEntity {
     @JsonIgnore
     @Enumerated(EnumType.STRING)
     @Column(length = 1)
-    private YNType activeYn = YNType.Y;
+    private YNType activeYn;
     @Builder.Default
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AccountAuthority> authorities = new ArrayList<>();
@@ -44,4 +44,5 @@ public class Account extends BaseEntity {
     public void modifyPassword(String password) {
         this.password = password;
     }
+    public void modifyActiveYn(YNType activeYn) { this.activeYn = activeYn; }
 }

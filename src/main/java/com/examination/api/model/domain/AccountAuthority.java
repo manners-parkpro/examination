@@ -1,5 +1,7 @@
 package com.examination.api.model.domain;
 
+import com.examination.api.model.dto.AccountDto;
+import com.examination.api.model.types.RoleType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,8 +24,9 @@ public class AccountAuthority {
     @Column(name = "account_authority_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
     @Column(length = 50)
-    private String authorityName;
+    private RoleType authorityName;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;

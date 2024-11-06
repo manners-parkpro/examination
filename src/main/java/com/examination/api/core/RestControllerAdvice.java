@@ -14,6 +14,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 public class RestControllerAdvice {
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity handleRuntimeException(RuntimeException e) {
+
+        log.error("handleRuntimeException" + e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ApiResult.builder()
+                        .code(ApiResult.RESULT_CODE_ERROR)
+                        .message(e.getMessage())
+                        .build());
+    }
+
     @ExceptionHandler(AlreadyEntity.class)
     public ResponseEntity handleAlreadyEntity(AlreadyEntity e) {
 

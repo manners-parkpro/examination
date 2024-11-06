@@ -1,4 +1,4 @@
-package com.examination.api.presentation.auth;
+package com.examination.api.presentation.front.auth;
 
 import com.examination.api.exception.AlreadyEntity;
 import com.examination.api.exception.RequiredParamNonException;
@@ -7,7 +7,7 @@ import com.examination.api.model.dto.ApiResult;
 import com.examination.api.model.dto.TokenDto;
 import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.types.ApiResultCode;
-import com.examination.api.service.auth.AuthService;
+import com.examination.api.service.front.auth.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

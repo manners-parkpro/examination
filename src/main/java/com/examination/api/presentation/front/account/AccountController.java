@@ -1,4 +1,4 @@
-package com.examination.api.presentation.account;
+package com.examination.api.presentation.front.account;
 
 import com.examination.api.exception.AlreadyEntity;
 import com.examination.api.exception.RequiredParamNonException;
@@ -8,7 +8,7 @@ import com.examination.api.model.dto.LoginUser;
 import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.model.types.ResponseMessage;
-import com.examination.api.service.account.AccountService;
+import com.examination.api.service.front.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

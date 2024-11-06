@@ -1,5 +1,6 @@
 package com.examination.api.model.dto;
 
+import com.examination.api.model.types.RoleType;
 import lombok.*;
 
 @Getter
@@ -8,5 +9,5 @@ import lombok.*;
 @AllArgsConstructor
 public class AccountAuthorityDto {
 
-    private String authorityName;
+    private RoleType authorityName;
 }

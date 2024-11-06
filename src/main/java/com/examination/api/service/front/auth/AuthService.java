@@ -1,4 +1,4 @@
-package com.examination.api.service.auth;
+package com.examination.api.service.front.auth;
 
 import com.examination.api.exception.AlreadyEntity;
 import com.examination.api.exception.RequiredParamNonException;
@@ -10,6 +10,8 @@ import com.examination.api.model.dto.TokenDto;
 import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.types.ResponseMessage;
 import com.examination.api.core.TokenProvider;
+import com.examination.api.model.types.RoleType;
+import com.examination.api.model.types.YNType;
 import com.examination.api.repository.account.AccountRepository;
 import com.examination.api.repository.jwt.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +46,7 @@ public class AuthService {
                 .username(dto.getUsername())
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .nickname(dto.getNickname())
-                .activeYn(dto.getActiveYn())
+                .activeYn(YNType.N)
                 .build();
 
         setAuthorities(account);
@@ -106,7 +108,7 @@ public class AuthService {
 
         List<AccountAuthority> authorities = new ArrayList<>();
         AccountAuthority authority = AccountAuthority.builder()
-                .authorityName("ROLE_USER")
+                .authorityName(RoleType.ROLE_USER)
                 .account(account)
                 .build();
 
@@ -114,7 +116,7 @@ public class AuthService {
         account.getAuthorities().addAll(authorities);
     }
 
-    private void isDuplicated(AccountDto.RequestDto dto) throws AlreadyEntity {
+    public void isDuplicated(AccountDto.RequestDto dto) throws AlreadyEntity {
         Account findAccount = repository.findByUsername(dto.getUsername());
 
         if (findAccount != null)

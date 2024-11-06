@@ -69,8 +69,7 @@ public class AccountDto {
         @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z]{2,10}$", message = "Nickname은 한글, 영문 최소 2자, 최대 10자로 입력해 주세요.")
         private String nickname;
         @JsonIgnore
-        @Builder.Default
-        private YNType activeYn = YNType.Y;
+        private YNType activeYn;
     }
 
     @Getter
