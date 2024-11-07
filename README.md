@@ -6,9 +6,9 @@
 
 ## 개발 💻
 ### 개발환경 📝
-- **Langage** : `JAVA 21`
+- **Langage** : `JAVA 17`
 - **IDE** : `IntelliJ`
-- **Framework** : `Spring Framework` `Spring Boot` `JPA` `QueryDSL`
+- **Framework** : `Spring Framework` `Spring Boot(3.x)` `JPA` `QueryDSL`
 - **DataBase** : `h2`
 - **ORM** : `hibernate`
 - **Auth** : `JWT Token`
