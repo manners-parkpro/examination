@@ -24,7 +24,7 @@ public class AccountController {
     private final AccountService service;
 
     @GetMapping("detail")
-    @Operation(summary = "유저 정보", description = "유저 상세정보 API")
+    @Operation(summary = "사용자 정보", description = "사용자 상세정보 API")
     public ApiResult<AccountDto.ResponseDto> detail(@AuthenticationPrincipal LoginUser loginUser) throws RequiredParamNonException, UserNotFoundException {
         if (loginUser == null)
             throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());

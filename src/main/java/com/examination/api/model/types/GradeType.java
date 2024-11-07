@@ -5,10 +5,13 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum RoleType {
+public enum GradeType {
 
-    ROLE_USER("사용자"),
-    ROLE_ADMIN("어드민");
+    GRADE_1("★"),
+    GRADE_2("★★"),
+    GRADE_3("★★★"),
+    GRADE_4("★★★★"),
+    GRADE_5("★★★★★");
 
     private final String description;
 }
