@@ -10,6 +10,7 @@
 - **IDE** : `IntelliJ`
 - **Framework** : `Spring Framework` `Spring Boot(3.x)` `JPA` `QueryDSL`
 - **DataBase** : `h2`
+  - **IntelliJ H2 연결** : Data Source from URL ➡️ Path 정보에 `./testdb.mv.db` 입력 ➡️ URL 정보에 `jdbc:h2:file:./testdb;NON_KEYWORDS=USER;AUTO_SERVER=TRUE` 입력 후 Server Restart
 - **ORM** : `hibernate`
 - **Auth** : `JWT Token`
 - **UI** : `Swagger UI`
