@@ -1,11 +1,8 @@
 package com.examination.api.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import static org.springframework.http.CacheControl.maxAge;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {

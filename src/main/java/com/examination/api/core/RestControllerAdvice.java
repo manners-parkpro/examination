@@ -1,6 +1,7 @@
 package com.examination.api.core;
 
 import com.examination.api.exception.AlreadyEntity;
+import com.examination.api.exception.NotFoundException;
 import com.examination.api.exception.UserNotFoundException;
 import com.examination.api.model.dto.ApiResult;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,18 @@ public class RestControllerAdvice {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ApiResult.builder()
                         .code(ApiResult.RESULT_CODE_ERROR)
+                        .message(e.getMessage())
+                        .build());
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity handleNotFoundException(NotFoundException e) {
+
+        log.error("handleNotFoundException" + e.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResult.builder()
+                        .code(ApiResult.RESULT_CODE_NOT_FOUND)
                         .message(e.getMessage())
                         .build());
     }

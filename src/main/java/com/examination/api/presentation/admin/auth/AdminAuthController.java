@@ -6,7 +6,6 @@ import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.dto.ApiResult;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.service.admin.auth.AdminAuthService;
-import com.examination.api.service.front.auth.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

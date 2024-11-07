@@ -39,10 +39,7 @@ public class SecurityConfig {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .exceptionHandling(eh -> eh
-                        .authenticationEntryPoint(authenticationEntryPoint)
-                        .accessDeniedHandler(accessDeniedHandler)
-                )
+                .formLogin(AbstractHttpConfigurer::disable)
                 .headers((headerConfig) ->
                         headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
                 )
@@ -60,7 +57,10 @@ public class SecurityConfig {
                                         ).permitAll()
                                         .anyRequest().authenticated()
                 )
-                .formLogin(AbstractHttpConfigurer::disable)
+                .exceptionHandling(eh -> eh
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
+                )
                 .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

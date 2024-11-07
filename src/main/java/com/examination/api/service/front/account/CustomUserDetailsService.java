@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private User createUser(String username, Account account) {
         if (YNType.N.equals(account.getActiveYn()))
-            throw new RuntimeException(username + " -> 활성화되어 있지 않습니다.");
+            throw new RuntimeException(username + " -> 계정은 활성화되어 있지 않습니다.");
 
         List<GrantedAuthority> grantedAuthorities = account.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName().toString()))
