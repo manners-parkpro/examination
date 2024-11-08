@@ -20,6 +20,7 @@
 - **Auth** : `JWT Token`
 - **UI** : `Swagger UI`
 - **API Tool** : `Postman`
+- **Default Data Set** : `src/main/java/com/examination/http/Default.http`
 
 ### 주요기능 📌
 #### 사용자
