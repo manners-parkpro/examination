@@ -34,7 +34,7 @@ public class RoomDto {
     // 인원제한
     @NotNull(message = "객실 인원을 입력해주세요.")
     @Max(8)
-    private Integer people;
+    private int people;
     // 가격
     @NotNull(message = "추가인원에 대한 가격을 입력해주세요.")
     @Min(message = "추가 인원 가격은 최소 10,000원 이상이여야 합니다.", value = 10000)

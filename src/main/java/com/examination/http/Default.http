@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "username": "park-pro@naver.com",
     "password": "hello123$",
-    "nickname": "쫑꾸"
+    "nickname": "쫑식꾸"
 }
 
 ### Admin 회원가입 ( 활성화 상태가 N 으로 최초 등록되기 때문에 회원가입 후 Y 로 변경해야 로그인이 가능하다. ) * 다른 관리자가 사용 권한을 승인해야 로그인 가능하다는 설정
@@ -153,3 +153,17 @@ Authorization: accessToken
 GET http://localhost:8080/api/admin/hotel/list
 Content-Type: application/json
 Authorization: accessToken
+
+### 호텔 객실 예약
+POST http://localhost:8080/api/reserve/{roomId}
+Content-Type: application/json
+Authorization: accessToken
+
+{
+  "name": "박가집안",
+  "englishName": "park",
+  "phone": "01098765432",
+  "reserveStartDate": "2024-11-08",
+  "reserveEndDate": "2024-11-09",
+  "people": 2
+}

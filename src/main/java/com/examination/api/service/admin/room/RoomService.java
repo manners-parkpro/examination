@@ -85,8 +85,23 @@ public class RoomService {
     }
 
     @Transactional(readOnly = true)
-    Room findById(Long id) throws NotFoundException {
+    public Room findById(Long id) throws NotFoundException {
         return repository.findById(id).orElseThrow(() -> new NotFoundException("Room Entity : " + ResponseMessage.NOT_FOUND.getMessage()));
+    }
+
+    @Transactional(readOnly = true)
+    public RoomDto findByIdToDto(Long id) throws NotFoundException {
+        Room room = repository.findById(id).orElseThrow(() -> new NotFoundException("Room Entity : " + ResponseMessage.NOT_FOUND.getMessage()));
+
+        return RoomDto.builder()
+                .id(room.getId())
+                .name(room.getName())
+                .description(room.getDescription())
+                .size(room.getSize())
+                .people(room.getPeople())
+                .additionalPersonPrice(room.getAdditionalPersonPrice())
+                .price(room.getPrice())
+                .build();
     }
 
     private void setRooms(Hotel hotel, RoomDto dto) {

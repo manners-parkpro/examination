@@ -88,7 +88,7 @@ public class AccountDto {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class activeDto {
+    public static class ActiveDto {
 
         @NotNull(message = "활성화 여부를 입력해주세요.")
         private YNType activeYn;

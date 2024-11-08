@@ -40,4 +40,5 @@ log/
 log/*
 
 application-oauth.yml
+application-key.yml
 testdb.*
