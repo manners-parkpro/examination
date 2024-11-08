@@ -39,6 +39,9 @@ public class Room extends BaseEntity {
     // 인원제한
     @Column(length = 10)
     private int people;
+    // 추가 인원 발생 금액
+    @Column(length = 10)
+    private BigDecimal additionalPersonPrice;
     // 가격
     private BigDecimal price;
     @Builder.Default
@@ -50,10 +53,11 @@ public class Room extends BaseEntity {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RoomCategory> roomCategories = new ArrayList<>();
 
-    public void put(String name, String description, int people, BigDecimal price) {
+    public void put(String name, String description, int people, BigDecimal additionalPersonPrice, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.people = people;
+        this.additionalPersonPrice = additionalPersonPrice;
         this.price = price;
     }
 

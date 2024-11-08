@@ -36,9 +36,13 @@ public class RoomDto {
     @Max(8)
     private Integer people;
     // 가격
+    @NotNull(message = "추가인원에 대한 가격을 입력해주세요.")
+    @Min(message = "추가 인원 가격은 최소 10,000원 이상이여야 합니다.", value = 10000)
+    @Max(message = "추가 인원 가격은 최대 1,000,000원 이하이여야 합니다.", value = 1000000)
+    private BigDecimal additionalPersonPrice;
     @NotNull(message = "객실 가격을 입력해주세요.")
     @Min(message = "객실가격은 최소 10,000원 이상이여야 합니다.", value = 10000)
-    @Max(message = "객실가격은 최소 100,000,000원 이하이여야 합니다.", value = 100000000)
+    @Max(message = "객실가격은 최대 100,000,000원 이하이여야 합니다.", value = 100000000)
     private BigDecimal price;
     // Category
     @Valid
@@ -56,6 +60,7 @@ public class RoomDto {
         // 방 공간 (㎡)
         private String size;
         private Integer people;
+        private String additionalPersonPrice;
         private String price;
         private List<RoomCategoryDto.RoomCategoryResponseDto> roomCategories = new ArrayList<>();
     }
