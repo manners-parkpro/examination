@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/admin/")
-@Tag(name = "Admin", description = "Admin 계정 활성화 API")
+@Tag(name = "Admin", description = "Admin 회원가입 및 계정 활성화 API")
 public class AdminAccountController {
 
     private final AdminAuthService service;

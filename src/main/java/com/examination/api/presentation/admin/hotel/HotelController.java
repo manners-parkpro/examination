@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/admin/hotel/")
-@Tag(name = "Hotel", description = "Hotel 정보 저장 및 관리 API")
+@Tag(name = "Hotel", description = "호텔 정보 및 호텔 편의시설 저장 및 관리 API")
 public class HotelController {
 
     private final HotelService service;
