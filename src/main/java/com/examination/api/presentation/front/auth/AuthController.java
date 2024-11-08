@@ -9,6 +9,7 @@ import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.service.front.auth.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth/")
+@Tag(name = "User", description = "User 회원가입, 로그인, 토큰 재발행, 로그아웃 API")
 public class AuthController {
 
     public static final String REFRESH_TOKEN_HEADER = "RefreshToken";

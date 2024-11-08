@@ -64,8 +64,8 @@ public class RestControllerAdvice {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity validationHandlerException(MethodArgumentNotValidException e) {
-        log.error("validationHandlerException :: " + e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+    public ResponseEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        log.error("handleMethodArgumentNotValidException :: " + e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ApiResult.builder()
