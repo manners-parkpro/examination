@@ -1,0 +1,155 @@
+### 회원가입 ( 비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요. )
+POST http://localhost:8080/api/auth/sign-up
+Content-Type: application/json
+
+{
+    "username": "park-pro@naver.com",
+    "password": "hello123$",
+    "nickname": "쫑꾸"
+}
+
+### Admin 회원가입 ( 활성화 상태가 N 으로 최초 등록되기 때문에 회원가입 후 Y 로 변경해야 로그인이 가능하다. ) * 다른 관리자가 사용 권한을 승인해야 로그인 가능하다는 설정
+### UPDATE ACCOUNT SET ACTIVE_YN = 'Y' WHERE USERNAME = 'park-pro@gmail.com';
+POST http://localhost:8080/api/auth/admin/sign-up
+Content-Type: application/json
+
+{
+    "username": "park-pro@gmail.com",
+    "password": "hello123$",
+    "nickname": "쫑식꾸"
+}
+
+### 로그인
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "park-pro@gmail.com",
+    "password": "hello123$"
+}
+
+### 관리자 활성화 여부 변경 ( * 반드시 관리자중 1명이 로그인 하여 상태를 변경한다는 가정 )
+POST http://localhost:8080/api/admin/active/{관리자ID}
+Content-Type: application/json
+
+{
+  "activeYn": "Y"
+}
+
+### 토큰 재발행 ( 로그인을 통해 취득한 RefreshToken )
+POST http://localhost:8080/api/auth/reissue
+Content-Type: application/json
+RequestHeader : refreshToken
+
+### 비밀번호 변경
+POST http://localhost:8080/api/user/modify/password
+Content-Type: application/json
+Authorization: accessToken
+
+{
+  "password": "hello789$"
+}
+
+### 로그아웃
+POST http://localhost:8080/api/auth/logout
+Content-Type: application/json
+Authorization: accessToken
+
+{
+  "username": "park-pro@naver.com"
+}
+
+### 회원정보
+GET http://localhost:8080/api/user/detail
+Content-Type: application/json
+Authorization: accessToken
+
+### 호텔정보 저장 ( grade : 호텔 등급 / amenities : 호텔 편의 시설 )
+POST http://localhost:8080/api/admin/hotel/save
+Content-Type: application/json
+Authorization: accessToken
+
+{
+  "name": "호텔닷컴",
+  "contactNumber": "0212340987",
+  "area": "구로구",
+  "address": "서울 구로구 개봉동 목감천",
+  "grade": "GRADE_3",
+  "amenities": [
+    {
+      "title": "논두렁 체험",
+      "description": "가족이 함께 논두렁에서 체험해봐요.",
+      "location": "호텔 외부",
+      "manageStartTime": "09:00",
+      "manageEndTime": "18:00"
+    }
+  ]
+}
+
+### 객실정보 저장 ( additionalPersonPrice : 추가 인원 발생시 금액 / roomCategories : 객실 편의 시설 )
+POST http://localhost:8080/api/admin/room/{hotelId}
+Content-Type: application/json
+Authorization: accessToken
+
+{
+  "name": "호텔닷컴 스위트룸",
+  "description": "객실 1",
+  "size": "34",
+  "people": 3,
+  "additionalPersonPrice": 10000,
+  "price": 78500,
+  "roomCategories": [
+    {
+      "category": "흡연가능"
+    },
+    {
+      "category": "수영장"
+    },
+    {
+      "category": "주차장"
+    },
+    {
+      "category": "와이파이"
+    }
+  ]
+}
+
+### 객실 정보 수정
+PUT http://localhost:8080/api/admin/room/put/{roomId}
+Content-Type: application/json
+Authorization: accessToken
+
+{
+  "name": "호텔닷컴 더블룸",
+  "description": "객실 1",
+  "size": "34",
+  "people": 3,
+  "price": 85000,
+  "roomCategories": [
+    {
+      "category": "흡연가능"
+    },
+    {
+      "category": "수영장"
+    }
+  ]
+}
+
+### 객실 삭제 여부 변경
+PATCH http://localhost:8080/api/admin/room/usable/{roomId}
+Content-Type: application/json
+Authorization: accessToken
+
+{
+  "deleteYn": "Y"
+}
+
+### 호텔 정보 삭제
+DELETE http://localhost:8080/api/admin/hotel/delete/{hotelId}
+Content-Type: application/json
+Authorization: accessToken
+
+### 호텔 리스트
+GET http://localhost:8080/api/admin/hotel/list
+Content-Type: application/json
+Authorization: accessToken
