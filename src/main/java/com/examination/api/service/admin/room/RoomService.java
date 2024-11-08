@@ -52,6 +52,7 @@ public class RoomService {
                 .description(item.getDescription())
                 .size(item.getSize())
                 .people(item.getPeople())
+                .additionalPersonPrice(convertCurrency(item.getAdditionalPersonPrice().intValue()))
                 .price(convertCurrency(item.getPrice().intValue()))
                 .roomCategories(item.getRoomCategories().stream().map(c -> RoomCategoryDto.RoomCategoryResponseDto.builder()
                         .id(c.getId())
@@ -71,7 +72,7 @@ public class RoomService {
         if (repository.countByHotelAndIdNotAndName(room.getHotel(), id, dto.getName()) > 0)
             throw new AlreadyEntity(dto.getName() + "은(는) 이미 존재하는 객실명 입니다.");
 
-        room.put(dto.getName(), dto.getDescription(), dto.getPeople(), dto.getPrice());
+        room.put(dto.getName(), dto.getDescription(), dto.getPeople(), dto.getAdditionalPersonPrice(), dto.getPrice());
         setRoomCategory(room, dto.getRoomCategories());
 
         repository.save(room);
@@ -99,6 +100,7 @@ public class RoomService {
                 .description(dto.getDescription())
                 .size(dto.getSize() + "㎡")
                 .people(dto.getPeople())
+                .additionalPersonPrice(dto.getAdditionalPersonPrice())
                 .price(dto.getPrice())
                 .build();
 
