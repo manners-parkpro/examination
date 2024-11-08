@@ -10,6 +10,7 @@ import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.model.types.ResponseMessage;
 import com.examination.api.service.front.account.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user/")
+@Tag(name = "User", description = "User 정보 조회 및 비밀번호 변경 API")
 public class AccountController {
 
     private final AccountService service;

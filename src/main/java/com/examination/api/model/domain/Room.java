@@ -41,6 +41,7 @@ public class Room extends BaseEntity {
     private int people;
     // 가격
     private BigDecimal price;
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(length = 1)
     private YNType deleteYn = YNType.N;

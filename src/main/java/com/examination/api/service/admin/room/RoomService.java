@@ -22,6 +22,8 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.examination.api.utils.CommonUtil.convertCurrency;
+
 @Service
 @RequiredArgsConstructor
 public class RoomService {
@@ -31,7 +33,7 @@ public class RoomService {
     private final HotelRepository hotelRepository;
 
     @Transactional
-    public HotelDto.HotelResponseDto save(Long hotelId, RoomDto dto) throws RequiredParamNonException, NotFoundException, AlreadyEntity {
+    public List<RoomDto.RoomResponseDto> save(Long hotelId, RoomDto dto) throws RequiredParamNonException, NotFoundException, AlreadyEntity {
         if (hotelId == null || dto == null || CollectionUtils.isEmpty(dto.getRoomCategories()))
             throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());
 
@@ -44,7 +46,18 @@ public class RoomService {
 
         hotelRepository.save(hotel);
 
-        return hotelService.responseData(hotel);
+        return hotel.getRooms().stream().map(item -> RoomDto.RoomResponseDto.builder()
+                .id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .size(item.getSize())
+                .people(item.getPeople())
+                .price(convertCurrency(item.getPrice().intValue()))
+                .roomCategories(item.getRoomCategories().stream().map(c -> RoomCategoryDto.RoomCategoryResponseDto.builder()
+                        .id(c.getId())
+                        .category(c.getCategory())
+                        .build()).toList())
+                .build()).toList();
     }
 
     @Transactional
@@ -76,7 +89,8 @@ public class RoomService {
     }
 
     private void setRooms(Hotel hotel, RoomDto dto) {
-        hotel.getRooms().clear();
+        // 객실은 추가 할수 있으므로 clear(); 하지 않고 쌓는다.
+        //hotel.getRooms().clear();
 
         List<Room> rooms = new ArrayList<>();
         Room room = Room.builder()
@@ -86,7 +100,6 @@ public class RoomService {
                 .size(dto.getSize() + "㎡")
                 .people(dto.getPeople())
                 .price(dto.getPrice())
-                .deleteYn(YNType.N)
                 .build();
 
         rooms.add(room);

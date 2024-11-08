@@ -10,6 +10,7 @@ import com.examination.api.model.dto.PageResponseDto;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.service.admin.hotel.HotelService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/admin/hotel/")
+@Tag(name = "Hotel", description = "Hotel 정보 저장 및 관리 API")
 public class HotelController {
 
     private final HotelService service;

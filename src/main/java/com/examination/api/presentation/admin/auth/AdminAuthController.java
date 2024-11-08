@@ -7,6 +7,7 @@ import com.examination.api.model.dto.ApiResult;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.service.admin.auth.AdminAuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth/admin/")
+@Tag(name = "Admin", description = "Admin 회원가입 API")
 public class AdminAuthController {
 
     private final AdminAuthService service;

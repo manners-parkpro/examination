@@ -9,24 +9,28 @@ import com.examination.api.model.dto.RoomDto;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.service.admin.room.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Log4j2
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/admin/room/")
+@Tag(name = "Room", description = "객실 정보 및 객실 카페고리(편의시설) 저장 및 관리 API")
 public class RoomConrtoller {
 
     private final RoomService service;
 
     @PostMapping("save/{hotelId}")
     @Operation(summary = "객실 정보 저장", description = "객실 정보 저장")
-    public ApiResult<HotelDto.HotelResponseDto> save(@PathVariable Long hotelId, @RequestBody @Valid RoomDto dto) throws RequiredParamNonException, NotFoundException, AlreadyEntity {
+    public ApiResult<List<RoomDto.RoomResponseDto>> save(@PathVariable Long hotelId, @RequestBody @Valid RoomDto dto) throws RequiredParamNonException, NotFoundException, AlreadyEntity {
 
-        return ApiResult.<HotelDto.HotelResponseDto>builder()
+        return ApiResult.<List<RoomDto.RoomResponseDto>>builder()
                 .code(ApiResult.RESULT_CODE_OK)
                 .data(service.save(hotelId, dto))
                 .message(ApiResultCode.SUCCESS.getCode())

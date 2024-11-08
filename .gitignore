@@ -40,3 +40,4 @@ log/
 log/*
 
 application-oauth.yml
+testdb.*
