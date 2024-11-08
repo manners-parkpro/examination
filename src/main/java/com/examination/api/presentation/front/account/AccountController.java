@@ -51,4 +51,15 @@ public class AccountController {
                 .message(ApiResultCode.SUCCESS.getCode())
                 .build();
     }
+
+    @GetMapping("reservation")
+    @Operation(summary = "호텔 예약 정보", description = "호텔 예약 상세정보 API")
+    public ApiResult<AccountDto.ResponseDto> reservation() throws RequiredParamNonException, UserNotFoundException {
+
+        return ApiResult.<AccountDto.ResponseDto>builder()
+                .code(ApiResult.RESULT_CODE_OK)
+                .data(null)
+                .message(ApiResultCode.SUCCESS.getCode())
+                .build();
+    }
 }

@@ -3,6 +3,7 @@ package com.examination.api.utils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +14,7 @@ import java.util.regex.Pattern;
 @Component
 public class CommonUtil {
 
-    public static String markDate(LocalTime startDate, LocalTime endDate) {
+    public static String markTime(LocalTime startDate, LocalTime endDate) {
         if (startDate == null || endDate == null)
             return "항시";
 
@@ -21,6 +22,13 @@ public class CommonUtil {
         String endTime = endDate.format(DateTimeFormatter.ofPattern("HH:mm"));
 
         return startTime + " ~ " + endTime;
+    }
+
+    public static String markDate(LocalDate startDate, LocalDate endDate) {
+        String start = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String end = endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        return start + " ~ " + end;
     }
 
     public static boolean isEmailRegex(String str) {

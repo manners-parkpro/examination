@@ -50,6 +50,9 @@ public class SecurityConfig {
                                                 new AntPathRequestMatcher("/api/admin/**")
                                         ).hasAnyRole("ADMIN")
                                         .requestMatchers(
+                                                new AntPathRequestMatcher("/api/reserve/**")
+                                        ).hasAnyRole("USER")
+                                        .requestMatchers(
                                                 new AntPathRequestMatcher("/h2-console/**"),
                                                 new AntPathRequestMatcher("/swagger-ui/**"),
                                                 new AntPathRequestMatcher("/v3/**"), // swagger-config

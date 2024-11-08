@@ -8,7 +8,6 @@ import com.examination.api.model.domain.Hotel;
 import com.examination.api.model.dto.*;
 import com.examination.api.model.types.GradeType;
 import com.examination.api.model.types.ResponseMessage;
-import com.examination.api.model.types.YNType;
 import com.examination.api.repository.hotel.HotelRepository;
 import com.examination.api.utils.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -104,7 +103,7 @@ public class HotelService {
                         .title(item.getTitle())
                         .description(item.getDescription())
                         .location(item.getLocation())
-                        .manageTime(markDate(item.getManageStartTime(), item.getManageEndTime()))
+                        .manageTime(markTime(item.getManageStartTime(), item.getManageEndTime()))
                         .build()).toList())
                 .build();
     }

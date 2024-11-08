@@ -53,6 +53,9 @@ public class Account {
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime modifiedDate;
+    @Builder.Default
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserve> reserves = new ArrayList<>();
 
     public void modifyPassword(String password) {
         this.password = password;

@@ -23,7 +23,7 @@ public class AdminAccountController {
 
     @PostMapping("active/{id}")
     @Operation(summary = "ADMIN 계정 활성화 변경", description = "ADMIN 계정 활성화 변경하는 API")
-    public ApiResult active(@PathVariable Long id, @RequestBody @Valid AccountDto.activeDto dto) throws UserNotFoundException {
+    public ApiResult active(@PathVariable Long id, @RequestBody @Valid AccountDto.ActiveDto dto) throws UserNotFoundException {
 
         service.active(id, dto.getActiveYn());
 

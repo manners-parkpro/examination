@@ -43,11 +43,11 @@ public class AccountService {
         account.modifyPassword(passwordEncoder.encode(password));
     }
 
-    private Account findAccount(String username) throws UserNotFoundException {
+    public Account findAccount(String username) throws UserNotFoundException {
         Account account = repository.findByUsername(username);
 
         if (account == null)
-            throw new UserNotFoundException(username + "를 찾을수 없습니다.");
+            throw new UserNotFoundException(username + "을(를) 찾을수 없습니다.");
 
         return account;
     }
