@@ -33,7 +33,7 @@
 - `객실`객체는 변동이 있을 수 있다고 판단하여 soft delete 방식으로 구성했다.
 
 ### 체크포인트 ✅
-- In-Memory DB ➡️ Cloud DB 변경 예정 🚧
+- In-Memory DB ➡️ Cloud DB 변경 예정 🚧
 - 호텔 Entity Domain 확장 🚧
 - 객실 Entity Domain 확장 🚧
 - 예약 Process 개발 예정 🚧
