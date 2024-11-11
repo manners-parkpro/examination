@@ -16,8 +16,10 @@ import com.examination.api.service.front.account.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.examination.api.utils.CommonUtil.convertContactNumber;
 import static com.examination.api.utils.CommonUtil.markDate;
@@ -35,15 +37,15 @@ public class ReserveService {
         if (roomId == null || dto == null)
             throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());
         else if (loginUser == null)
-            throw new UserNotFoundException("로그인을 먼저 진행해 주세요.");
+            throw new UserNotFoundException(ResponseMessage.NOT_FOUND.getMessage());
 
         Account account = accountService.findAccount(loginUser.getPrincipal());
         if (account == null)
-            throw new UserNotFoundException(loginUser.getPrincipal() + " 사용자를 찾을 수 없습니다.");
+            throw new UserNotFoundException(loginUser.getPrincipal() + ResponseMessage.NOT_FOUND.getMessage());
 
         Room room = roomService.findById(roomId);
         if (room == null)
-            throw new NotFoundException("객실 정보를 찾을 수 없습니다.");
+            throw new UserNotFoundException(ResponseMessage.NOT_FOUND.getMessage());
 
         // Validation
         valid(room.getId(), dto);
@@ -67,6 +69,22 @@ public class ReserveService {
                 .reserveDate(markDate(dto.getReserveStartDate(), dto.getReserveEndDate()))
                 .people(dto.getPeople())
                 .build();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReserveDto.ResponseDto> findReservation(String usernam) throws UserNotFoundException {
+        if (!StringUtils.hasText(usernam))
+            throw new UserNotFoundException(ResponseMessage.NOT_FOUND.getMessage());
+
+        Account account = accountService.findAccount(usernam);
+        if (account == null)
+            throw new UserNotFoundException(ResponseMessage.NOT_FOUND.getMessage());
+
+        return account.getReserves().stream().map(item -> ReserveDto.ResponseDto.builder()
+                .name(item.getName())
+                .reserveDate(markDate(item.getReserveStartDate(), item.getReserveEndDate()))
+                .people(item.getPeople())
+                .build()).toList();
     }
 
     private void valid(Long roomId, ReserveDto dto) throws NotFoundException {

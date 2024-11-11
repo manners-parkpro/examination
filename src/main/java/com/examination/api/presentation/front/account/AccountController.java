@@ -6,6 +6,7 @@ import com.examination.api.exception.UserNotFoundException;
 import com.examination.api.model.dto.ApiResult;
 import com.examination.api.model.dto.LoginUser;
 import com.examination.api.model.dto.AccountDto;
+import com.examination.api.model.dto.ReserveDto;
 import com.examination.api.model.types.ApiResultCode;
 import com.examination.api.model.types.ResponseMessage;
 import com.examination.api.service.front.account.AccountService;
@@ -48,17 +49,6 @@ public class AccountController {
 
         return ApiResult.<AccountDto.ResponseDto>builder()
                 .code(ApiResult.RESULT_CODE_OK)
-                .message(ApiResultCode.SUCCESS.getCode())
-                .build();
-    }
-
-    @GetMapping("reservation")
-    @Operation(summary = "호텔 예약 정보", description = "호텔 예약 상세정보 API")
-    public ApiResult<AccountDto.ResponseDto> reservation() throws RequiredParamNonException, UserNotFoundException {
-
-        return ApiResult.<AccountDto.ResponseDto>builder()
-                .code(ApiResult.RESULT_CODE_OK)
-                .data(null)
                 .message(ApiResultCode.SUCCESS.getCode())
                 .build();
     }
