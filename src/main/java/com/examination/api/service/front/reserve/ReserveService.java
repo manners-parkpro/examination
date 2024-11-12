@@ -39,13 +39,13 @@ public class ReserveService {
         else if (loginUser == null)
             throw new UserNotFoundException(ResponseMessage.NOT_FOUND.getMessage());
 
+        Room room = roomService.findById(roomId);
+        if (room == null)
+            throw new NotFoundException(ResponseMessage.NOT_FOUND.getMessage());
+
         Account account = accountService.findAccount(loginUser.getPrincipal());
         if (account == null)
             throw new UserNotFoundException(loginUser.getPrincipal() + ResponseMessage.NOT_FOUND.getMessage());
-
-        Room room = roomService.findById(roomId);
-        if (room == null)
-            throw new UserNotFoundException(ResponseMessage.NOT_FOUND.getMessage());
 
         // Validation
         valid(room.getId(), dto);
@@ -69,6 +69,28 @@ public class ReserveService {
                 .reserveDate(markDate(dto.getReserveStartDate(), dto.getReserveEndDate()))
                 .people(dto.getPeople())
                 .build();
+    }
+
+    @Transactional
+    public void cancel(Long roomId, LoginUser loginUser) throws NotFoundException, RequiredParamNonException {
+        if (roomId == null)
+            throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());
+        else if (loginUser == null)
+            throw new UserNotFoundException(ResponseMessage.NOT_FOUND.getMessage());
+
+        Room room = roomService.findById(roomId);
+        if (room == null)
+            throw new NotFoundException(ResponseMessage.NOT_FOUND.getMessage());
+
+        Account account = accountService.findAccount(loginUser.getPrincipal());
+        if (account == null)
+            throw new UserNotFoundException(loginUser.getPrincipal() + ResponseMessage.NOT_FOUND.getMessage());
+
+        Reserve reserve = repository.findByRoomAndAccount(room, account);
+        if (reserve == null)
+            throw new NotFoundException(ResponseMessage.NOT_FOUND.getMessage());
+
+        repository.delete(reserve);
     }
 
     @Transactional(readOnly = true)
