@@ -91,7 +91,7 @@ public class RoomService {
 
     @Transactional(readOnly = true)
     public RoomDto findByIdToDto(Long id) throws NotFoundException {
-        Room room = repository.findById(id).orElseThrow(() -> new NotFoundException("Room Entity : " + ResponseMessage.NOT_FOUND.getMessage()));
+        Room room = findById(id);
 
         return RoomDto.builder()
                 .id(room.getId())

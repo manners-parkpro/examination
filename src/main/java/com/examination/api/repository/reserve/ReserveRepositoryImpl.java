@@ -1,5 +1,8 @@
 package com.examination.api.repository.reserve;
 
+import com.examination.api.model.domain.Account;
+import com.examination.api.model.domain.Reserve;
+import com.examination.api.model.domain.Room;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,14 @@ public class ReserveRepositoryImpl implements ReserveRepositoryCustom {
                 .select(reserve.count())
                 .from(reserve)
                 .where(search(reserveStartDate, reserveEndDate))
+                .fetchFirst();
+    }
+
+    @Override
+    public Reserve findByRoomAndAccount(Room room, Account account) {
+        return jpaQueryFactory
+                .selectFrom(reserve)
+                .where(reserve.room.eq(room), reserve.account.eq(account))
                 .fetchFirst();
     }
 

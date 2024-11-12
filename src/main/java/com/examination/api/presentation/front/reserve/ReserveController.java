@@ -38,6 +38,18 @@ public class ReserveController {
                 .build();
     }
 
+    @DeleteMapping("cancel/{roomId}")
+    @Operation(summary = "객실 예약 취소", description = "객실 예약 취소")
+    public ApiResult cancel(@PathVariable Long roomId, @AuthenticationPrincipal LoginUser loginUser) throws RequiredParamNonException, NotFoundException {
+
+        service.cancel(roomId, loginUser);
+
+        return ApiResult.builder()
+                .code(ApiResult.RESULT_CODE_OK)
+                .message(ApiResultCode.SUCCESS.getCode())
+                .build();
+    }
+
     @GetMapping("reservation")
     @Operation(summary = "호텔 예약 정보", description = "호텔 예약 상세정보 API")
     public ApiResult<List<ReserveDto.ResponseDto>> reservation(@AuthenticationPrincipal LoginUser loginUser) throws UserNotFoundException {
