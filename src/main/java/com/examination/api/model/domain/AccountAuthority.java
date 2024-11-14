@@ -1,6 +1,5 @@
 package com.examination.api.model.domain;
 
-import com.examination.api.model.dto.AccountDto;
 import com.examination.api.model.types.RoleType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
