@@ -37,7 +37,7 @@ public class ReserveDto {
     private LocalDate reserveStartDate;
     // 예약 종료 일자
     @NotNull(message = "예약 종료 일자 선택해주세요.")
-    @FutureOrPresent(message = "예약 종료 일자는 미래 날짜로 선택해주세요.")
+    @FutureOrPresent(message = "예약 종료 일자는 현재 또는 미래 날짜로 선택해주세요.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate reserveEndDate;
     // 신청 인원
