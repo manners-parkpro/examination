@@ -22,10 +22,10 @@ public class ReserveDto {
 
     private Long id;
     @NotBlank(message = "신청자 이름을 입력해주세요.")
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z\s]{2,100}$", message = "신청자 이름은 한글, 영문 최소 2자, 최대 100자로 입력해 주세요.")
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z\s]{2,50}$", message = "신청자 이름은 한글, 영문 최소 2자, 최대 50자로 입력해 주세요.")
     private String name;
     @NotBlank(message = "신청자의 영문 이름을 입력해주세요.")
-    @Pattern(regexp = "^[a-zA-Z\s]{2,100}$", message = "신청자의 영문 이름은 영문 최소 2자, 최대 100자로 입력해 주세요.")
+    @Pattern(regexp = "^[a-zA-Z\s]{2,50}$", message = "신청자의 영문 이름은 영문 최소 2자, 최대 50자로 입력해 주세요.")
     private String englishName;
     @NotBlank(message = "연락처를 입력해주세요.")
     @Pattern(regexp = "^[0-9]{9,11}$", message = "연락처는 숫자로만 입력이 가능합니다.")
