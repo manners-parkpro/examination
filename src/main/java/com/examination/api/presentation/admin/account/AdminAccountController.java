@@ -25,7 +25,7 @@ public class AdminAccountController {
     @Operation(summary = "ADMIN 계정 활성화 변경", description = "ADMIN 계정 활성화 변경하는 API")
     public ApiResult active(@PathVariable Long id, @RequestBody @Valid AccountDto.ActiveDto dto) throws UserNotFoundException {
 
-        service.active(id, dto.getActiveYn());
+        service.active(id, dto.activeYn());
 
         return ApiResult.builder()
                 .code(ApiResult.RESULT_CODE_OK)

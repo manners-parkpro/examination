@@ -60,7 +60,7 @@ public class AuthController {
     @Operation(summary = "로그아웃", description = "사용자 로그아웃 API")
     public ApiResult logout(@RequestBody @Valid AccountDto.LogoutDto dto) throws UserNotFoundException {
 
-        service.logout(dto.getUsername());
+        service.logout(dto.username());
 
         return ApiResult.builder()
                 .code(ApiResult.RESULT_CODE_OK)

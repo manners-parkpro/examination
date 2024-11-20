@@ -27,9 +27,9 @@ public class AdminAuthService {
         service.isDuplicated(dto);
 
         Account account = Account.builder()
-                .username(dto.getUsername())
-                .password(passwordEncoder.encode(dto.getPassword()))
-                .nickname(dto.getNickname())
+                .username(dto.username())
+                .password(passwordEncoder.encode(dto.password()))
+                .nickname(dto.nickname())
                 .activeYn(YNType.N)
                 .build();
 
