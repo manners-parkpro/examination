@@ -43,9 +43,9 @@ public class AuthService {
         isDuplicated(dto);
 
         Account account = Account.builder()
-                .username(dto.getUsername())
-                .password(passwordEncoder.encode(dto.getPassword()))
-                .nickname(dto.getNickname())
+                .username(dto.username())
+                .password(passwordEncoder.encode(dto.password()))
+                .nickname(dto.nickname())
                 .activeYn(YNType.Y)
                 .build();
 
@@ -64,13 +64,13 @@ public class AuthService {
         if (dto == null)
             throw new RequiredParamNonException(ResponseMessage.REQUIRED.getMessage());
 
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
         // authenticate 메소드가 실행이 될 때 CustomUserDetailsService class의 loadUserByUsername 메소드가 실행
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         // 해당 객체를 SecurityContextHolder에 저장하고
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return getTokenByProvider(authentication, dto.getUsername());
+        return getTokenByProvider(authentication, dto.username());
     }
 
     @Transactional
@@ -117,12 +117,12 @@ public class AuthService {
     }
 
     public void isDuplicated(AccountDto.RequestDto dto) throws AlreadyEntity {
-        Account findAccount = repository.findByUsername(dto.getUsername());
+        Account findAccount = repository.findByUsername(dto.username());
 
         if (findAccount != null)
             throw new AlreadyEntity("AlreadyEntity USER");
 
-        findAccount = repository.findByNickname(dto.getNickname());
+        findAccount = repository.findByNickname(dto.nickname());
 
         if (findAccount != null)
             throw new AlreadyEntity("AlreadyEntity USER NICKNAME");

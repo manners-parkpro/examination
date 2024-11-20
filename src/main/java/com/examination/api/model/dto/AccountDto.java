@@ -26,71 +26,50 @@ public class AccountDto {
 
     private Long id;
 
-    @Getter
     @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class LoginDto {
+    public record LoginDto(
+            @NotBlank(message = "아이디를 입력해주세요.")
+            @EmailValid(message = "Username이 올바르지 않은 형식입니다.")
+            String username,
+            @NotBlank(message = "비밀번호를 입력해주세요.")
+            String password
+    ) {}
 
+    @Builder
+    public record LogoutDto(
         @NotBlank(message = "아이디를 입력해주세요.")
         @EmailValid(message = "Username이 올바르지 않은 형식입니다.")
-        private String username;
+        String username
+    ) {}
 
-        @NotBlank(message = "비밀번호를 입력해주세요.")
-        private String password;
-    }
-
-    @Getter
     @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class LogoutDto {
-
-        @NotBlank(message = "아이디를 입력해주세요.")
-        @EmailValid(message = "Username이 올바르지 않은 형식입니다.")
-        private String username;
-    }
-
-    @Getter
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class RequestDto {
+    public record RequestDto(
 
         @NotBlank(message = "Username이 입력해주세요.")
         @EmailValid(message = "Username이 올바르지 않은 형식입니다.")
-        private String username;
-
+        String username,
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         @NotBlank(message = "비밀번호를 입력해주세요.")
         @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
-        private String password;
-
+        String password,
         @NotBlank(message = "Nickname을 입력해주세요.")
         @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z]{2,10}$", message = "Nickname은 한글, 영문 최소 2자, 최대 10자로 입력해 주세요.")
-        private String nickname;
+        String nickname,
         @JsonIgnore
-        private YNType activeYn;
-    }
+        YNType activeYn
+    ) {}
 
-    @Getter
     @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class ResponseDto {
+    public record ResponseDto(
+            String username,
+            String nickname,
+            @JsonInclude(NON_NULL)
+            List<AccountAuthorityDto> authorities
+    ) {}
 
-        private String username;
-        private String nickname;
-        @JsonInclude(NON_NULL)
-        private List<AccountAuthorityDto> authorities = new ArrayList<>();
-    }
-
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class ActiveDto {
-
+    @Builder
+    public record ActiveDto(
         @NotNull(message = "활성화 여부를 입력해주세요.")
-        private YNType activeYn;
-    }
+        YNType activeYn
+    ) {}
 }
