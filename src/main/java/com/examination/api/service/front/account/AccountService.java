@@ -43,6 +43,7 @@ public class AccountService {
         account.modifyPassword(passwordEncoder.encode(password));
     }
 
+    @Transactional(readOnly = true)
     public Account findAccount(String username) throws UserNotFoundException {
         Account account = repository.findByUsername(username);
 
