@@ -116,6 +116,7 @@ public class AuthService {
         account.getAuthorities().addAll(authorities);
     }
 
+    @Transactional(readOnly = true)
     public void isDuplicated(AccountDto.RequestDto dto) throws AlreadyEntity {
         Account findAccount = repository.findByUsername(dto.username());
 
@@ -128,7 +129,8 @@ public class AuthService {
             throw new AlreadyEntity("AlreadyEntity USER NICKNAME");
     }
 
-    private TokenDto getTokenByProvider(Authentication authentication, String username) {
+    @Transactional
+    TokenDto getTokenByProvider(Authentication authentication, String username) {
         TokenDto tokenDto = tokenProvider.generateToken(authentication);
 
         // DB에 Token이 존재 하는지 체크
